@@ -36,7 +36,7 @@ int CreateProcess() {
     return pid;
 }
 
-int GetFileDescriptor(char *filename) {
+int OpenFile(char *filename) {
     TrimString(filename);
     int fd = open(filename, O_RDONLY);
     return fd;

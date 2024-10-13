@@ -3,9 +3,10 @@
 #include "unistd.h"
 #include "utils.h"
 
-const int BUFFER_SIZE = 1024;
+
 
 int main() {
+    const int BUFFER_SIZE = 1024;
     char buffer[BUFFER_SIZE];
     ssize_t bytes_read;
     char *endPtr;

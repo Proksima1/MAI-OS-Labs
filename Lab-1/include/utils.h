@@ -19,7 +19,7 @@ void TrimString(char *str);
 
 int CreateProcess();
 
-int GetFileDescriptor(char *filename);
+int OpenFile(char *filename);
 
 void CreatePipe(int pipeFd[2]);
 

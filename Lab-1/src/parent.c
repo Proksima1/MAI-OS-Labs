@@ -2,10 +2,10 @@
 #include "sys/wait.h"
 #include "stdlib.h"
 
-const int BUFFER_SIZE = 1024;
 
 int MainFunction(char *filename) {
-    int fileDescriptor = GetFileDescriptor(filename);
+    const int BUFFER_SIZE = 1024;
+    int fileDescriptor = OpenFile(filename);
     int pipeDescriptor[2];
     CreatePipe(pipeDescriptor);
     pid_t pid = CreateProcess();

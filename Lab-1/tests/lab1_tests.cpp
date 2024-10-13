@@ -44,6 +44,12 @@ protected:
 };
 
 
+FILE *openMemoryStream(char buffer[]) {
+    FILE *pFile = fmemopen(buffer, 1024, "w");
+    return pFile;
+}
+
+
 TEST_F(Lab1Test, HandleSomePrimeNumbers) {
     std::array<int, 5> input = {
             4, 10, 5, 20, 31
@@ -52,18 +58,18 @@ TEST_F(Lab1Test, HandleSomePrimeNumbers) {
     std::array<int, 2> expectedOutput = {
             4, 10
     };
-    char mybuffer[1024];
-    FILE *pFile = fmemopen(mybuffer, 1024, "w");
+    char buffer[1024];
+    FILE *pFile = openMemoryStream(buffer);
     std::swap(stdout, pFile);
 
     MainFunction(fileWithInput);
 
     std::swap(stdout, pFile);
     fclose(pFile);
-    std::string capturedOutput(mybuffer);
+    std::string capturedOutput(buffer);
     std::replace(capturedOutput.begin(), capturedOutput.end(), '\n', ' ');
     capturedOutput.erase(capturedOutput.end() - 1, capturedOutput.end());
-    ASSERT_EQ(capturedOutput, join(expectedOutput, " "));
+    EXPECT_EQ(capturedOutput, join(expectedOutput, " "));
 }
 
 TEST_F(Lab1Test, HandleAllPrimeNumbers) {
@@ -72,8 +78,8 @@ TEST_F(Lab1Test, HandleAllPrimeNumbers) {
     };
     WriteToFile(input);
     std::array<int, 0> expectedOutput = {};
-    char mybuffer[1024];
-    FILE *pFile = fmemopen(mybuffer, 1024, "w");
+    char buffer[1024];
+    FILE *pFile = openMemoryStream(buffer);
     std::swap(stdout, pFile);
 
     MainFunction(fileWithInput);
@@ -81,7 +87,7 @@ TEST_F(Lab1Test, HandleAllPrimeNumbers) {
     std::swap(stdout, pFile);
     fclose(pFile);
 
-    std::string capturedOutput(mybuffer);
+    std::string capturedOutput(buffer);
     std::string expected = join(expectedOutput, " ");
     EXPECT_EQ(capturedOutput, expected);
 }
