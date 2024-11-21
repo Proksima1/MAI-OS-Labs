@@ -27,7 +27,7 @@ void TrimString(char *str) {
 }
 
 
-int CreateProcess() {
+int CreateProcess(void) {
     pid_t pid = fork();
     if (-1 == pid) {
         perror("fork");
