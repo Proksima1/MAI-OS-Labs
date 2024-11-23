@@ -28,8 +28,8 @@ add_dependencies(OS_LABS child)
 #add_executable(reader reader.c)
 
 
-#add_executable(${CMAKE_PROJECT_NAME}_tests tests/lab1_tests.cpp src/parent.c src/utils.c)
-#target_link_libraries(${CMAKE_PROJECT_NAME}_tests PRIVATE GTest::GTest)
-#target_include_directories(${CMAKE_PROJECT_NAME}_tests PRIVATE include)
-#
-#add_test(NAME ${CMAKE_PROJECT_NAME}_tests COMMAND ${CMAKE_PROJECT_NAME}_tests)
+add_executable(${CMAKE_PROJECT_NAME}_tests tests/lab3_tests.cpp src/parent.c src/utils.c)
+target_link_libraries(${CMAKE_PROJECT_NAME}_tests PRIVATE GTest::GTest)
+target_include_directories(${CMAKE_PROJECT_NAME}_tests PRIVATE include)
+
+add_test(NAME ${CMAKE_PROJECT_NAME}_tests COMMAND ${CMAKE_PROJECT_NAME}_tests)
