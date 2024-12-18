@@ -8,6 +8,13 @@ typedef int (*gcd_func)(int, int);
 
 typedef double (*pi_func)(int);
 
+void checkDlError(char *error) {
+    if ((error = dlerror()) != NULL) {
+        fprintf(stderr, "%s\n", error);
+        exit(EXIT_FAILURE);
+    }
+}
+
 
 int main() {
     void *handle;
@@ -22,12 +29,11 @@ int main() {
     }
 
     GCD_func = dlsym(handle, "GCD_Euclid");
-    PI_func = dlsym(handle, "PiLeibniz");
+    checkDlError(error);
 
-    if ((error = dlerror()) != NULL) {
-        fprintf(stderr, "%s\n", error);
-        return 1;
-    }
+    PI_func = dlsym(handle, "PiLeibniz");
+    checkDlError(error);
+
 
     bool isFirstImp = true;
     int variant;
@@ -38,7 +44,7 @@ int main() {
             int first, second;
             scanf("%d %d", &first, &second);
             int first_gcd = GCD_func(first, second);
-            printf("Answer -%d\n", first_gcd);
+            printf("Answer - %d\n", first_gcd);
         } else if (variant == 2) {
             int k;
             scanf("%d", &k);
@@ -47,15 +53,20 @@ int main() {
         } else if (variant == 0) {
             if (isFirstImp) {
                 GCD_func = dlsym(handle, "GCD_Naive");
+                checkDlError(error);
                 PI_func = dlsym(handle, "PiWallis");
+                checkDlError(error);
                 printf("Swapped to GCD naive and Pi Wallis\n");
                 isFirstImp = false;
             } else {
                 GCD_func = dlsym(handle, "GCD_Euclid");
+                checkDlError(error);
                 PI_func = dlsym(handle, "PiLeibniz");
+                checkDlError(error);
                 printf("Swapped to GCD Euclid and Pi Leibniz\n");
                 isFirstImp = true;
             }
         }
     }
+    dlclose(handle);
 }
