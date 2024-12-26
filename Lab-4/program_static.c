@@ -12,13 +12,13 @@ int main() {
         int first_gcd = GCD_Euclid(first, second);
         int second_gcd = GCD_Naive(first, second);
         printf("Euclid - %d\n", first_gcd);
-        printf("Naive - %d", second_gcd);
+        printf("Naive - %d\n", second_gcd);
     } else if (variant == 2) {
         int k;
         scanf("%d", &k);
         double PI = PiWallis(k);
         double PI2 = PiLeibniz(k);
         printf("Wallis - %.10f\n", PI);
-        printf("Leibniz - %.10f", PI2);
+        printf("Leibniz - %.10f\n", PI2);
     }
 }

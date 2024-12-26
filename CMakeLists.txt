@@ -6,4 +6,4 @@ enable_testing()
 
 include(FindThreads)
 
-add_subdirectory(Lab-5)
+add_subdirectory(CP)
